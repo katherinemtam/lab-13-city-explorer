@@ -1,5 +1,6 @@
 import locationData from '../data/location.js';
-import { formatLocation } from '../lib/munge-utils.js';
+import weatherData from '../data/weather.js';
+import { formatLocation, formatWeather } from '../lib/munge-utils.js';
 
 describe('API Data Mung', () => {
 
@@ -21,8 +22,28 @@ describe('API Data Mung', () => {
     },
   ];
 
+  const expectedWeather = [
+    {
+      forecast: 'Broken clouds',
+      time: '2021-05-12',
+    },
+    {
+      forecast: 'Few clouds',
+      time: '2021-05-13',
+    },
+    {
+      forecast: 'Moderate rain',
+      time: '2021-05-14',
+    },
+  ];
+
   it('munges location data', async () => {
     const output = formatLocation(locationData);
     expect(output).toEqual(expectedLocation);
+  });
+
+  it('munges weather data', async () => {
+    const output = formatWeather(weatherData);
+    expect(output).toEqual(expectedWeather);
   });
 });
