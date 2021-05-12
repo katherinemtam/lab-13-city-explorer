@@ -1,6 +1,7 @@
 import locationData from '../data/location.js';
 import weatherData from '../data/weather.js';
-import { formatLocation, formatWeather } from '../lib/munge-utils.js';
+import yelpData from '../data/yelp.js';
+import { formatLocation, formatWeather, formatYelp } from '../lib/munge-utils.js';
 
 describe('API Data Mung', () => {
 
@@ -37,6 +38,30 @@ describe('API Data Mung', () => {
     },
   ];
 
+  const expectedYelp = [
+    {
+      name: 'Howlin\' Ray\'s',
+      image_url: 'https://s3-media1.fl.yelpcdn.com/bphoto/YiQBbn9bTpDLMCufWigAug/o.jpg',
+      price: '$$',
+      rating: 4.5,
+      url: 'https://www.yelp.com/biz/howlin-rays-los-angeles-3?adjust_creative=vs3ZUpUGd-kK96jk2mkmRA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=vs3ZUpUGd-kK96jk2mkmRA'
+    },
+    {
+      name: 'Daikokuya Little Tokyo',
+      image_url: 'https://s3-media3.fl.yelpcdn.com/bphoto/GG71SxFbzBd9-SRMRtB1EQ/o.jpg',
+      price: '$$',
+      rating: 4.0,
+      url: 'https://www.yelp.com/biz/daikokuya-little-tokyo-los-angeles?adjust_creative=vs3ZUpUGd-kK96jk2mkmRA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=vs3ZUpUGd-kK96jk2mkmRA'
+    },
+    {
+      name: 'Wurstküche',
+      image_url: 'https://s3-media2.fl.yelpcdn.com/bphoto/gzEMY8RZP2oIBnUMs1-76w/o.jpg',
+      price: '$$',
+      rating: 4.0,
+      url: 'https://www.yelp.com/biz/wurstk%C3%BCche-los-angeles-2?adjust_creative=vs3ZUpUGd-kK96jk2mkmRA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=vs3ZUpUGd-kK96jk2mkmRA'
+    }
+  ];
+
   it('munges location data', async () => {
     const output = formatLocation(locationData);
     expect(output).toEqual(expectedLocation);
@@ -45,5 +70,10 @@ describe('API Data Mung', () => {
   it('munges weather data', async () => {
     const output = formatWeather(weatherData);
     expect(output).toEqual(expectedWeather);
+  });
+  
+  it('munges yelp data', async () => {
+    const output = formatYelp(yelpData);
+    expect(output).toEqual(expectedYelp);
   });
 });
